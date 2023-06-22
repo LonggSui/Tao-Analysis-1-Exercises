@@ -1,0 +1,315 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{parskip}
+\usepackage{amssymb}
+\begin{document}
+\title{Tao Analysis 1 Chapter 3.5 Exercises}
+\author{Long Sui Wong}
+\date{17 June 2023 to 22 June 2023}
+\maketitle
+
+
+\section{About This Writing}
+1. Nothing here is verified, its just my personal attempt and posting it so maybe it will benefit someone in the future. Also, I don't have formal proof-writing background, so my writing is also very questionable. There are a couple of questions where the proof-writing is definitely needlessly long for example. However, I hope and do believe much of the logic structure is still correct and that this could be a useful resource. 
+
+2. The exercises are from Tao Analysis I, 4th edition. Sometimes, I prefer partitioning non-partition questions into different parts: (i),(ii), etc to further simplify the problem. This is why it may not look like it matches the 4th edition but the questions are indeed identical.
+
+3. Just a quick ranking of the questions based on my perception of difficulty(hardest to easiest): $(2=10=12)>(1=7=8=9=11=13)>(3=4=5=6)$
+
+
+
+\section{Completed}
+3.5.1(ii,iii), 3.5.2, 3.5.3, 3.5.4, 3.5.5, 3.5.6, 3.5.7, 3.5.8, 3.5.9, 3.5.10, 3.5.11, 3.5.12(i), 3.5.13
+\section{Uncompleted}
+3.5.1(i) got lazy, this should be very similar to 3.5.1(ii) but simpler
+
+3.5.12(ii) its too difficult for me right now, maybe I will revisit it one day
+
+\section{Exercise 3.5.1(ii)}
+Recap:
+1. Axiom of regularity: If $X$ is a non-empty set, then there exists $x \in X$ st $x$ is either not a set or $x$ is disjoint from $X$
+2. Lemma: If $A$ is a set, then $A \notin A$. Also, if A and B are two sets, then either $A \notin B$ or $B \notin A$
+
+WTS: If we define $(x,y)$ as $\{x,\{x,y\}\}$, $(x,y)$ will still satisfy the following property:
+$(x,y)=(x',y')$ iff ($x=x'$ and $y=y'$)
+
+$<==$, assume $x=x'$ and $y=y'$, then $\{x,y\} =\{x',y'\}$ by equality of sets, so again by equality of sets, we have that $(x,y)=\{x,\{x,y\}\}=\{x',\{x',y'\}\}=(x',y')$ as desired. 
+
+$==>$, assume $(x,y)=(x',y')$, then let $a \in (x,y)$, then $a \in (x',y')$. So we have ($a=x$ or $a=\{x,y\}$) and ($a=x'$ or $a=\{x',y'\}$). A similar statement can be made starting from $b \in (x',y')$
+
+Case 1: $x=y$, then $\{x,y\}=\{x\}$. FSOC, assume $\{x\}=x'$, then $x \neq x'$ by "Lemma" if $x$ is a set, and this will also hold if $x$ is not a set since equality of sets and non-sets are not defined. Thus $x=\{x',y'\}=\{\{x\},y'\}\}$. But then we have $\{x\} \in x$ and $x \in \{x\}$, giving us our contradiction by the 2nd part of the "Lemma". Thus $\{x\}=\{x',y'\}$ instead which implies $x=x'=y'$ and since $x=y$, we also get $y=y'$ which is what we wanted.
+
+Case 2: $x \neq y$.
+FSOC, assume $x=\{x',y'\}$, then $\{x,y\}=x'$ will give us a contradiction using the "Lemma", since $x' \in x$ and $x \in x'$. On the other hand, if $\{x,y\}=\{x',y'\}$, then $x=\{x,y\}$ but then since $x' \in (x,y)$, this will again imply $\{x,y\}=x'$ which will also lead to a contradiction. Thus instead, $x=x'$. FSOC, If $\{x,y\}=x'$, we will get a contradiction from "Lemma", since $x \in x$. Thus instead, $\{x,y\}=\{x',y'\}$. So either $x=x'$ and $y=y'$ or $x=y'$ and $y=x'$. The second clearly does not hold since it will imply $x=y$ so we have that $x=x'$ and $y=y'$ as desired. $\square$
+
+
+
+
+
+\section{Exercise 3.5.1(iii)}
+Note that I will be using the original definition of ordered pair as an axiom and not the construction from set theory, but proof should be identical in either case.
+Recap: $X \times Y$ is defined as the set of all ordered pairs where the first component is in $X$ and the second component is in $Y$
+WTS: $X \times Y$ is a set. This is equivalent to saying that $X \times Y$ exists.
+
+Let $x \in X$, then we use the axiom of replacement on $Y$ to construct the set $\{(x,y):y \in Y\}$ . Having shown that such a set exists for any $x \in X$. We again use the axiom of replacement on $X$ to construct the set $\{\{(x,y):y \in Y\}: x\in X\}$. Then, apply the axiom of union get the set $\bigcup \{\{(x,y):y \in Y\}: x\in X\}$ .  Let this set be $A$. We will now show that  $A=X \times Y$ since this will be equivalent to saying that $X \times Y$ is a set. Let $a \in A$,  then $a \in S$ where $S \in \{\{(x,y):y \in Y\}: x\in X\}$ and thus $S=\{(x_1,y):y \in Y\}$ for some $x_1 \in X$. By the axiom of replacement, this will mean $a=(x_1,y_1)$ for some $y_1 \in Y$. Therefore, we have shown that every element in $A$ is an ordered paired with the first component is in $X$ and the second component is in $Y$.
+
+Now, we must show that every ordered pair $(x',y') \in A$, where $x' \in $ X and $y' \in Y$.  We have that $(x',y') \in \{(x',y):y \in Y\}$ by the axiom of replacement. Then, since $\{(x',y):y \in Y\} \in \{\{(x,y):y \in Y\}: x\in X\}$, by the axiom of union, $(x',y') \in A$ as desired. $\square$
+
+\section{Exercise 3.5.2(i)}
+Note: Will be splitting question into 2 parts even though original exercise doesn't
+WTS: If we were to define an ordered n-tuple as the surjective function $x: \{i \in \mathbb{N}:1 \le i \le n\}  \rightarrow X$, where $X$ is an arbitrary set. We then write $x_i$ for $x(i)$ and write $x$ as $(x_i)_{1 \le i \le n}$. Using this definition,  show that $(x_i)_{1 \le i \le n}=(y_i)_{1 \le i \le n}$ iff $x_i=y_i$ for $1 \le i \le n$.
+
+$\Longrightarrow$ Assume $(x_i)_{1 \le i \le n}=(y_i)_{1 \le i \le n}$. We can rewrite the LHS as the function $x$, and the RHS as the function $y$, then by the axiom of equality of functions, we have that $x_i=x(i)=y(i)=y_i$ for  $1 \le i \le n$ as desired. 
+
+$\Longleftarrow$ Assume $x_i=y_i$ for $1 \le i \le n$, then $x(i)=y(i)$ for $1 \le i \le n$. Then, since the domain of both $x$ and $y$ is $\{i: 1 \le i \le n\}$. We have that both of their range is $\{x(i): 1 \le i \le n\}$ and since both are surjective, they also share the same codomain. Thus, by axion of equality of functions, we have $x=y$ and equivalently $(x_i)_{1 \le i \le n}=(y_i)_{1 \le i \le n}$ as desired. $\square$
+
+\section{Exercise 3.5.2(ii)}
+Note: The proof-writing here is very bad, definitely could be made alot cleaner but the logic should be sound.
+Recap: Partial functions from $X$ to $Y$ are defined as any function from $X'$ to $Y'$ where $X' \subseteq X$ and $Y' \subseteq Y$. Exercise 3.4.7 gives us the existence of the set of all partial functions from $X$ to $Y$. The axiom of specification gives us the set $\{x \in X:P(x)\}$. The cartesian product of a n-tuple of sets is defined the set containing all $n$-tuples, where the $i$th component is an element of the $i$th set for $1 \le i \le n$
+WTS: If $(X_i)_{1 \le i \le n}$ are an ordered n-tuple of sets, then the cartesian product is a set.
+
+Let $A = \{i\in \mathbb{n}:1 \le i \le n\}$. We start by using the axiom of union to get the set $\bigcup \{X_i: i \in A\}$. We call this set $Y$. Then, by exercise 3.4.7. there exists a set containing all partial functions from $A$ to $Y$. We call this set $Z$. For all $z \in Z$, let $P(z)$ be true if  $z$ is a surjective function from $A$ to $Y'$, $Y' \subseteq Y$. We use the axiom of specification on $Z$ to get the set $\{z \in Z: P(z)\}$. We again use the axiom of specification on $Z'$ to get the set $\{z' \in Z':z'(i) \in X_i, i \in A \}$. We call this set $Z''$, we will now show that $Z''$ is the cartesian product of $(X_i)_{1 \le i \le n}$. 
+
+Let $z'' \in Z''$, then $z'' \in Z'$ , and $z''$ is a surjective function from $A$ to $Y'$. $z''$ is thus an $n$-tuple since it satisfies the definition given in (i). Also, we have that $z''(i) \in X_i$ for $i \in A$. Therefore, we have shown that any element of $Z''$ is an $n$-tuple where the $i$th component is in $X_i$ for $i \in A$. We will now show that any $n$-tuple where the $i$th component is in $X_i$ for $i \in A$, is an element of Z''. Let $w$ be such an $n$-tuple, then since it is surjective, its codomain is the same as its range, $R=\{w_i: i\in A\}$. Since $w_i \in X_i$ for $i \in A$, we have that $R \subseteq Y$. Thus, $w \in Z$ since it is a partial function. Clearly, it is also in $Z'$ since its a function from $A$ to $R$, $R \subseteq Y$. Lastly, it will also be in $Z''$ since  $w_i \in X_i$ for $i \in A$. Thus, $Z''$ is the cartesian product as desired.
+
+\section{Exercise 3.5.3}
+Recap: reflexivity means for any object $x$, $x=x$. symmetry means for any two objects of same type $x$ and $y$, if $x=y$, then $y=x$. transitivity means for any three objects of same type $x, y$ and $z$ , if $x=y$ and $y=z$, then $x=z$.
+WTS: Definition of equality of ordered pair and n-tuples satisfy the reflexivity, symmetry, and transitivity axioms assuming the axioms hold for all component.
+
+Let $x$ be an $n$-tuple, for $1 \le i \le n$, the $i$th component, $x_i$ will satisify $x_i=x_i$ by assumption. By the definitions of equality of n-tuples, we have that $x=x$ as desired. 
+
+Let $x,y$ be two $n$-tuples such that $x=y$. Then by definition of equality of $n$-tuples, we have that $x_i=y_i$ for $1 \le i \le n$. By assuming the symmetry  hold for components, we also get $y_i=x_i$ for $1 \le i \le n$. Again, using the definition of equality of $n$-tuples, we have that $y=x$ as desired.
+
+Let $x,y$ and $z$ be $n$-tuples such that $x=y$ and $y=z$. So we have $x_i=y_i$ and $y_i=z_i$ for $1 \le i \le n$ . By assuming that transitivity holds for components, we also get $x_i=z_i$ for $1 \le i \le n$. By definition of equality of n-tuples, we get $x=z$ as desired. $\square$
+
+\section{Exercise 3.5.4(i)}
+Note: I will be splitting this into 3 parts, although proofs are almost identical for every part. For all 3 parts, Let A, B and C be sets. Also note that in the book, Tao says "(One can of course prove
+similar identities in which the rôles of the left and right factors of the Cartesian product are reversed.)", he just means for example $(A \times B) \cup C$ instead of $A \times (B \cup C)$. I will not be showing this.
+
+WTS: $A \times (B \cup C) = (A \times B) \cup (A \times C)$ 
+
+$\Longrightarrow$ Let $x \in A \times (B \cup C)$, then $x$ is an ordered pair where $x_1 \in A$ and $x_2 \in B\cup C$, then by definition of union, we also have that $x_2 \in B$ or $x_2 \in C$. Thus, $x \in A \times B$ or $x \in A\times C$. This will also mean that $x \in (A \times B) \cup (A \times C)$ as desired.
+
+$\Longleftarrow$ Let $x \in (A \times B) \cup (A \times C)$, then $x \in A \times B$ or $x \in A\times C$. Thus, $x$ is an ordered pair where $x_1 \in A$ and $x_2 \in B$ or $x_2 \in C$. Equivalently, $x_1 \in A$ and $x_2 \in B\cup C$. Thus $x \in A \times (B \cup C)$ as desired. $\square$
+
+
+\section{Exercise 3.5.4(ii)}
+WTS: $A \times (B \cap
+C) = (A \times B) \cap (A \times C)$ 
+
+$\Longrightarrow$ Let $x \in A \times (B \cap
+C)$, then $x$ is an ordered pair where $x_1 \in A$ and $x_2 \in (B \cap
+C)$. Then, by definition of intersection, we also have that $x_2 \in B$ and $x_2 \in C$. Thus, $x \in A \times B$ and $x \in A \times C$. This will also mean that $x \in (A \times B) \cap (A \times C)$ as desired.
+
+$\Longleftarrow$ Let $x \in (A \times B) \cap (A \times C)$, then $x \in A \times B$ and $x \in A\times C$. Thus, $x$ is an ordered pair where $x_1 \in A$ and ($x_2 \in B$ and $x_2 \in C$). Equivalently, $x_1 \in A$ and $x_2 \in B\cap C$. Thus $x \in A \times (B \cap C)$ as desired. $\square$ 
+
+\section{Exercise 3.5.4(iii)}
+WTS: $A \times (B\backslash C) = (A \times B) \backslash (A \times C)$
+
+ $\Longrightarrow$ Let $x \in A \times (B\backslash C)$, then $x$ is an ordered pair where $x_1 \in A$ and $x_2 \in (B\backslash C)$. Then, by definition of exclusion, we also have that $x_2 \in B$ and $x_2 \notin C$. Thus, $x \in A \times B$ and $x \notin A \times C$. This will also mean that $x \in (A \times B) \backslash (A \times C)$ as desired.
+
+ $\Longleftarrow$ Let $x \in(A \times B) \backslash (A \times C)$, then $x \in A \times B$ and $x \notin A\times C$. Thus, $x$ is an ordered pair where $x_1 \in A$ and ($x_2 \in B$ and $x_2 \notin C$). Equivalently, $x_1 \in A$ and $x_2 \in B\backslash C$. Thus $x \in A \times (B \backslash C)$ as desired. $\square$ 
+
+\section{Exercise 3.5.5(i)}
+Note: Will once again be splitting this exercise into three parts. For all 3 parts, Let $A, B,C$ and $D$ be sets. 
+
+WTS: $(A \times B) \cap (C \times D) = (A \cap C) \times (B \cap D)$
+
+$\Longrightarrow$ Let $x \in (A \times B) \cap (C \times D)$, then $x \in A \times B$ and $x \in C \times D$. Thus, we have that $x$ is an ordered pair where the first component, $x_1$, is in both $A$ and $C$ and the second component, $x_2$, is in $B$ and $D$. Equivalently, $x_1 \in A \cap C$ and $x_2 \in B\cap D$. Thus, we have that $x \in (A \cap C) \times (B \cap D)$  as desired.
+
+$\Longleftarrow$ Let $x \in (A \cap C) \times (B \cap D)$, then $x$ is an ordered pair where the first component, $x_1 \in A \cap C$ and the second component, $x_2 \in B \cap D$. Equivalently, we have that $x_1 \in A$ and $x_1 \in C$ and $x_2 \in B$ and $x_2 \in D$. Thus $x \in A \times B$ and $x \in c \times D$. This will mean that $x \in (A \times B) \cap (C \times D)$ as desired. $\square$ 
+
+\section{Exercise 3.5.5(ii)}
+WTS: $(A \times B) \cup (C \times D) = (A \cup C) \times (B \cup D)$ is not true in general. Equivalently, find counterexample where an element is in one of the sets but not in the other.
+
+Let $A = \{1\}, B=\{2\}, C=\{3\}$ and $D=\{4\}$. The $2$-tuple $(1,4) \in (A \cup C) \times (B \cup D)$ since $1 \in A \cup C$ and $2 \in B\cup D$. However, $1 \notin B$ so $(1,4) \notin B \cup D$ and $2 \notin C$ so $(1,4) \notin A \cup C$. Thus, we have shown that $(1,4) \notin (A \cup C) \times (B \cup D)$. $\square$
+
+\section{Exercise 3.5.5(iii)}
+WTS: $(A \times B)\backslash (C \times D) = (A\backslash C) \times (B\backslash D)$ is not true in general. Equivalently, find counterexample where an element is in one of the sets but not in the other.
+
+Let $A=C=\{1\}$, Let $B=\{2\}$ and $D=\{3\}$. Then, $A \backslash C$ is the empty set. So, $(A\backslash C) \times (B\backslash D)$ is also an empty set since no $n$-tuples can be formed where the first component is in $A\backslash C$ since this set is empty. However, $(1,2) \in A \times B$ since $1 \in A$ and $2 \in B$. Also, $(1,2) \notin C \times D$ since $2 \in D$. Thus, we have that $(1,2) \in (A \times B)\backslash (C \times D)$ and is not empty. Thus, the two sets are not equal. $\square$ 
+
+\section{Exercise 3.5.6(i)}
+Note: Will be splitting this into 3 parts, for all 3 parts, let $A, B,C, D$ be non-empty sets.
+
+WTS: $A \times B \subseteq C \times D$ iff $A \subseteq C$ and $B \subseteq D$
+
+$\Longrightarrow$ Assuming  $A \times B \subseteq C \times D$, then let $x_1 \in A$ and $x_2 \in B$ , then we can construct the ordered pair $x=(x_1,x_2)$.Since $x \in A \times B$, then $x \in C \times D$. so we have that $x_1 \in C$ and $x_2 \in D$, thus $A \subseteq C$ and $B \subseteq D$ as desired.
+
+$\Longleftarrow$ Assuming $A \subseteq C$ and $B \subseteq D$, then let $x \in A \times B$, then $x_1 \in A$ and $x_2 \in B$, by assumption, this will also mean that $x_1 \in C$ and $x_2 \in D$, but then this will mean that $x \in C \times D$ as desired. $\square$
+
+\section{Exercise 3.5.6(ii)}
+WTS:  $A \times B = C \times D$ iff $A = C$ and $B = D$
+
+$\Longrightarrow$ Assuming $A \times B= C\times D$, then we have $A \times B \subseteq C \times D$ and $A\times B \supseteq C\times D$.  Using part(i) of this exercise will immediately give us that $A\subset C$ and $B\subset D$  and $A \supset C$ and $B \supset D$. Thus, $A=C$ and $B=D$ as desired.
+
+$\Longleftarrow$ Assuming $A=C$ and $B=D$, then we have $A\subset C$ and $B\subset D$  and $A \supset C$ and $B \supset D$. Using part(i) of this exercise will immediately give us that $A \times B \subseteq C \times D$  and $A\times B \supseteq C \times D$. Thus,  $A \times B = C \times D$ as desired. $\square$
+
+\section{Exercise 3.5.6(iii)}
+WTS: What happens if some or all of the hypotheses that the A, B,C, D are non-empty are removed?
+
+(i) If $C$ or $D$ are empty, the results will still hold in the $\Longleftarrow$  direction since both products are empty. $\Longrightarrow$ on the otherhand will no longer since, its possible for $A$ to be non-empty and B to be empty, and thus $A \times B$ is empty and a subset of $C\times D$ and yet $A \not\subseteq C$ .  
+
+If $A$ or $B$ are empty, $\Longrightarrow$ for the same reason as above. In the $\Longleftarrow$ direction, the results will always hold, since $A \times B$ is empty and the empty set is a subset of every set.
+
+(ii) There are too many cases to deal with, I will just be doing a single counterexample, to show that (ii) no longer holds in general. Let $B=C=D=\{\}$, and $A=\{1\}$, then clearly $A\times B=C\times D$ since the cartesian product is empty if at least one set is empty. However, $A \not= C$, thus $\Longrightarrow$ does not hold in general. $\square$
+
+\
+\section{Exercise 3.5.7}
+Note: Instead of using the full definition of function to show that $h$ exists, we can define $h$ similar to how Tao defines the coordinate function with an explicit formula. Let $h : Z \rightarrow X \times Y$, where $h(z):=(f(z),g(z))$. ALSO, the exercises ask us to do a comparison between Exercises 3.1.7 and 3.4.8, I have no real idea what parallel im suppose to be making. I asked online for help and got that 3.4.8 and 3.5.7 are related by something something duality, they both have the same structure but are sort of reversed, if this doesn't  make sense, its because im not too sure what im saying either but at the same time it does make abit of intuitive sense to me. Sorry for this confusing word-salad. As for 3.1.7 and 3.5.7, i really have no idea.
+
+WTS: Show that for any functions $f : Z \rightarrow X$ and $g : Z \rightarrow Y$ , there exists a unique function $h : Z \rightarrow X \times Y$ such that $\pi_{X\times Y \Rightarrow X}\circ h =f$ and $\pi_{X\times Y \Rightarrow Y}\circ h =g$. 
+
+I will be using the full definition of  function for practice. For each $z \in Z$ and an object $(x,y) \in X\times Y$, we assign a property $P(z,(x,y))$ that is true if $(x,y)=(f(z),g(z))$. Clearly, there is at least one such element of $X \times Y$ since $f(z) \in X$ and $g(z) \in Y$ and there is at most once such element since if $P(z, (x,y))$ and $P(z,(x',y'))$ is true for both $(x,y) \in X\times Y$ and $(x',y') \in X \times Y$. Then, $(x,y)=(f(z),g(z))=(x',y')$. Then we define the function $h$ as the object which when given the input $z \in Z$, returns the unique object $(f(z),g(z)) \in X \times Y$ st $P(z,(f(z),g(z))$ is true.  
+
+We now show that $h$ satisfies $\pi_{X\times Y \Rightarrow X}\circ h =f$ .  For any $z \in Z$, we have that $\pi_{X\times Y \Rightarrow X}\circ h(z)$=$\pi_{X\times Y \Rightarrow X}(h(z))$=$\pi_{X\times Y \Rightarrow X}(f(z),g(z))=f(z)$, by the equality of functions, the composite and f are thus equal. An almost identical argument will hold for $\pi_{X\times Y \Rightarrow Y}\circ h =g$.
+
+Having shown the existence of $h$, we now show its uniqueness. We do this by contradiction, assuming h is not unique, then exists another $h'$ that also satisfies the question but $h'\not= h$ . By equality of functions, we have that there must exists $z \in Z$ st $h'(z) \not=h(z)$. Since both are $\in X \times Y$, we have that both are ordered pairs. So we rewrite them as $h'(z)=(x',y')$ and $h(z)=(x,y)$. By equality of ordered pairs, since they are unequal, $x' \not = x$ or $y' \not = y$. WLOG, assume $x' \not = x$, then we have that $f(z)=\pi_{X\times Y \Rightarrow X}\circ h(z)=x$ and $f(z)=\pi_{X\times Y \Rightarrow X}\circ h'(z)=x'$. Thus, we get that $f(z)\not=f(z)$ which is a contradiction. Therefore, $h$ must be unique. $\square$
+
+\section{Exercise 3.5.8}
+Note: I did use the result of this exercise for ordered pairs in some of the previous exercises, but i think the proof of the result for ordered pair is quite simple, you can turn it into a lemma too if you really wanted to make sure argument is not circular.
+
+WTS: $\prod_{i=1}^{n} X_i$ is empty iff at least one of the Xi is empty.
+
+$\Longrightarrow$ Assume $\prod_{i=1}^{n} X_i$ is empty. We will use contraposition, using the axiom of finite choice, we have that if $X_i$ are nonempty for all $i$, then there exists an $n$-tuple, $(x_i)_{1\le i \le n}$ , where $x_i \in X_i$ for $1 \le i \le n$. Thus, $\prod_{i=1}^{n} X_i$ is non-empty. By contraposition, if all of the $X_i$ are non-empty, then the cartesian product is not empty, thus if the cartesian product is empty, then at least one of the $X_i$ must be empty.
+
+$\Longleftarrow$ Assume at least one of the $X_i$ is empty. We use contraposition again. Assume that $\prod_{i=1}^{n} X_i$ is non-empty, then there exists an $n$-tuple, $z \in \prod_{i=1}^{n} X_i$. Then by definition, the $i$th component of $z$, $z_i \in X_i$ for $1 \le i \le n$. Thus, all the $X_i$ are non-empty since they contain at least one element, $z_i$.  Thus, by contraposition, if all $X_i$ are empty, then $\prod_{i=1}^{n} X_i$ is empty as desired. $\square$
+
+\section{Exercise 3.5.9(i)}
+Note: will split into two parts
+
+WTS: $(\bigcup_{\alpha \in I} A_\alpha) \cap (\bigcup_{\beta \in J} B_\beta)=\bigcup_{(\alpha,\beta) \in I \times J}(A_\alpha \cap B_\beta)$ 
+
+$\Longrightarrow$ Let $x \in (\bigcup_{\alpha \in I} A_\alpha) \cap (\bigcup_{\beta \in J} B_\beta)$, then $x\in \bigcup_{\alpha \in I} A_\alpha$ and $x \in \bigcup_{\beta \in J} B_\beta$.  Then $x\in A_{\alpha'}$ and $x \in B_{\beta'}$ for some $\alpha' \in I$ and some $\beta' \in J$.  Thus, we have that $x \in A_{\alpha'} \cap B_{\beta'}$ and $(\alpha',\beta') \in I \times J$. Therefore, we have that $A_{\alpha'} \cap B_{\beta'} \in \{(A_\alpha \cap B_\beta):(\alpha,\beta) \in I \times J\}$. And thus $x\in \bigcup_{(\alpha,\beta) \in I \times J}(A_\alpha \cap B_\beta)$ as desired. 
+
+$\Longleftarrow$ Let $x \in \bigcup_{(\alpha,\beta) \in I \times J}(A_\alpha \cap B_\beta)$. Then, there exist $S \in \{(A_\alpha \cap B_\beta):(\alpha,\beta) \in I \times J\}$ st $x \in S$. By axiom of replacement, we have that $S=A_{\alpha'} \cap B_{\beta'}$ for some $(\alpha',\beta') \in I \times J$. So, we get that $x\in A_{\alpha'}$ and $x \in B_{\beta'}$ and also that $\alpha' \in I$ and $\beta' \in J$ from the definition of the cartesian product. This will mean that $A_{\alpha'} \in \{A_\alpha:\alpha \in I \}$ and $B_{\beta'} \in \{B_\beta:\beta \in J\}$. Thus, $x\in \bigcup_{\alpha \in I} A_\alpha$ and $x\in \bigcup_{\beta \in J} B_\beta$. This allows us to conclude that $x \in (\bigcup_{\alpha \in I} A_\alpha) \cap (\bigcup_{\beta \in J} B_\beta)$ as desired. $\square$ 
+
+\section{Exercise 3.5.9(ii)}
+Note: Usually for the exercises, when Tao asks "What happens if one interchanges all the union and intersection symbols here?", instead of telling you to show that this also holds, the answer is that it no longers holds and then you have to find a counter-example. But for this case, im pretty sure that the equality still does hold.
+
+Recap: $A \subseteq A\cup B$ from exercise 3.1.7
+
+WTS: $(\bigcap_{\alpha \in I} A_\alpha) \cup (\bigcap_{\beta \in J} B_\beta)=\bigcap_{(\alpha,\beta) \in I \times J}(A_\alpha \cup B_\beta)$
+
+$\Longrightarrow $ Assume $x \in (\bigcap_{\alpha \in I} A_\alpha) \cup (\bigcap_{\beta \in J} B_\beta)$, then $x \in (\bigcap_{\alpha \in I} A_\alpha)$ or $(\bigcap_{\beta \in J} B_\beta)$. WLOG, assume that $x \in (\bigcap_{\alpha \in I} A_\alpha)$, then we have that $x \in A_\alpha$ for all $\alpha \in I$. Since  $A_\alpha \subseteq A_\alpha \cup B_\beta$ for all $(\alpha,\beta) \in I \times J$. We have that $x \in (A_\alpha \cup B_\beta)$ for all $(\alpha,\beta) \in I \times J$ and thus $x \in \bigcap_{(\alpha,\beta) \in I \times J}(A_\alpha \cup B_\beta)$ as desired. 
+
+$\Longleftarrow$ Assume $x \in \bigcap_{(\alpha,\beta) \in I \times J}(A_\alpha \cup B_\beta)$, then $x \in A_\alpha \cup B_\beta$ for all $(\alpha,\beta) \in I \times J$. We will now show that this implies that ($x \in A_\alpha$ for all $\alpha \in I$) or  ($x \in B_\beta$ for all $\beta \in J$). We do this by contraposition, assume that both statements are false, then there exists $\alpha' \in I$ and $\beta' \in J$ st $x \not\in A_{\alpha'}$ and $x \notin B_{\beta'}$, but then $x \not\in A_{\alpha'} \cup B_{\beta'}$ for $(\alpha',\beta') \in I \times J$ and thus $x \not\in \bigcap_{(\alpha,\beta) \in I \times J}(A_\alpha \cup B_\beta) $. Thus, by contraposition, if $x \in \bigcap_{(\alpha,\beta) \in I \times J}(A_\alpha \cup B_\beta)$, then ($x \in A_\alpha$ for all $\alpha \in I$) or  ($x \in B_\beta$ for all $\beta \in J$). WLOG, assume $x \in A_\alpha$ for all $\alpha \in I$, then $x \in \bigcap_{\alpha \in I} A_\alpha$ and thus $x \in (\bigcap_{\alpha \in I} A_\alpha) \cup (\bigcap_{\beta \in J} B_\beta)$ as desired.
+
+
+\section{Exercise 3.5.10(i)}
+Note: $f : X \rightarrow Y$ is a function, define the graph of $f$ to be the subset of $X \times Y$ defined by ${(x, f (x)) : x \in X}$.
+
+WTS: $f=f'$ iff they have the same graph
+
+$\Longrightarrow$ Assume $f=f'$, let $G_f$ be the graph of $f$, let $a \in G_f$, then $a=(x,f(x))$ for some $x\in X$. Since $f=f'$, we also get that $f(x)=f'(x)$, thus by equality and thus $a=(x,f'(x))$ by axiom of substitution. Thus $a \in G_{f'}$, the graph of $f'$. We can do an identical argument to show that any element in the graph of $G_{f'}$ is also an element of $G_f$, thus $f$ and $f'$ have the same graph.
+
+$\Longleftarrow$ Assume $f$ and $f'$ have the same graph, let $x \in X$, then $(x,f(x)) \in G_f$, since the graph of both functions are equal, we also have that $(x,f(x)) \in G_{f'}$, then $(x,f(x))=(x',f'(x'))$ but by equality of ordered pairs, we have that $x=x'$ and $f(x)=f'(x')$, substituting the first into the second, we get that $f(x)=f'(x)$, thus we have shown that for any $x \in X$, $f(x)=f'(x)$, thus the two functions are equal as desired. $\square$
+
+\section{Exercise 3.5.10(ii)}
+
+WTS: Conversely, if $G$ is any subset of $X \times Y$ with the property that for each $x \in X$, the set $\{y \in Y :(x, y) \in G\}$ has exactly one element. Show that there is exactly one function $f : X \rightarrow Y$ whose graph is equal to $G$
+
+Let $f: X \rightarrow Y$ where $f(x)$ is the sole element of the set ${y \in Y :(x, y) \in G}$. We first show that this function's graph is equal to $G$. Let $a \in G_f$, the graph of $f$, then $a=(x,f(x))$ where $f(x)$ is the sole element of the set ${y \in Y :(x, y) \in G}$. But then, this will mean that $(x,f(x)) \in G$, otherwise $f(x) \not\in {y \in Y :(x, y) \in G}$. In the other direction, let $b \in G$, then $b=(x',y')$ for some $x' \in X$ and $y' \in Y$, but then $y' \in {y \in Y :(x', y) \in G}$. But by definition, there is only one such element of this set and since $f(x')$ is defined to be the sole element of the set $y' \in {y \in Y :(x', y) \in G}$, then $f(x')=y'$. Therefore, since $(x',f(x')) \in G_f$, we also have that by substitution $(x',y') \in G_f$, thus both graphs are the same.
+
+Now, we show uniqueness. FSOC, assume there exists another function $f'$ st $f' \not\in f$ but $f'$ graph is equal to $G$. We immediately get a contradiction by using the result of part(i) since if both the graphs of $f'$ and $f$ are equal to $G$, then they must be the same function. Thus, only one function has a graph that is equal to $G$. $\square$
+
+\section{Exercise 3.5.10(iii)}
+
+Note: Suppose we define a function $f$ to be an ordered triple $f = (X, Y, G)$, where $X, Y$ are sets and $G$ is a subset of $X \times Y$ that obeys the vertical line test. We then define the domain of such a triple to be $X$, the codomain to be $Y$ and for every $x \in X$, we define $f(x)$ to be the unique $y \in Y$ such that $(x, y) \in G$
+
+Recap: Before diving into the proof, just wanted to make sure the definitions above make sense. Obeys vertical line test just means that $G$ has the property in part(ii), this is also what gives us the unique $y \in Y$ st $(x,y) \in G$ 
+
+WTS(Full question): Show that this definition is compatible with Definition 3.3.1 in the sense that every choice of domain $X$, codomain $Y$ , and property $P(x, y)$ obeying the vertical line test produces a function as defined here that obeys all the propertys required of it in that definition, and is also similarly compatible with Definition 3.3.8.
+
+WTS: This is kind of compact. Firstly, show that any function defined using 3.3.1 can be redefined using our new definition while obeying all the properties of a function as defined in 3.3.1. Secondly, we show that equality of functions also hold if two functions have the same domain and codomain and have the same output when giving any input in the domain.
+
+Suppose we have a domain $X$, codomain $Y$ , and property $P(x, y)$ obeying the vertical line test. Then, for any $x \in X$, there is exactly one $y \in Y$, st $P(x,y)$ is true. Thus for $x \in X$, and $(x,y) \in X \times Y$, let $Q(x,(x,y))$ be true if $P(x,y)$ is true, by the prior, statement, there is exactly one $y$ st $P(x,y)$ is true for a fixed $x$ and thus there is exactly one $(x,y)$ st $Q(x,(x,y))$ is true.
+
+Then, we can use the axiom of replacement to construct the set $\{(x,y)\in X\times Y: Q(x,(x,y)), x \in X\}$ .  This set will be $G$. By the axiom of replacement, clearly any $g \in G$ is an ordered pair that is an element of $X \times Y$. Thus $G \subseteq X\times Y$. Since for any $x$, there is exactly one $(x,y)$ in $G$ where the second component is an element of $Y$ and thus $\{y \in Y: (x,y) \in G\}$ is not empty and contains exactly one unique element.
+
+Thus, we can construct $f = (X, Y, G)$. Similar to the definition in 3.3.1, we have that the domain is $X$, and the codomain is $Y$. We also get that given any input $x$, we have $f(x)$ to be the unique  $y \in Y$ st $(x,y) \in G$. $(x,y) \in G$ implies $Q(x,(x,y))$ is true, this subsequently implies $P(x,y)$ is true for this unique $y$. Thus, the definition in 3.3.1 is satisfied.
+
+Now we show that equality of functions is defined similarly. Let $f=(X,Y,G)$ and $f'=(X',Y',G')$. Clearly by equality of ordered n-tuples, for $f$=$f'$, $X=X'$ and $Y=Y'$, thus we get that they must have the same domain and codomain. Also, we require that $G=G'$.  Since for any $x \in X$, $f(x)$ is defined as the unique $y \in Y$ st $(x,y) \in G$. Then $(x,y) \in G'$ and thus $f'(x)$ must also be $y$, otherwise, there would more than one $y'$ st $(x,y')\in G$. So we have that $f(x)=f'(x)$. $\square$
+
+\section{Exercise 3.5.11}
+Recap: Axiom 3.11 is the power set axiom and states that there exists a set containing all functions from $X$ to $Y$. Lemma 3.4.10 states that if $X$ is a set, then $\{Y : Y \subseteq X\}$ is also a set. A subset $X' \times Y'$ of $X \times Y$ obeys the vertical line test if for each $x \in X$, the set $\{y \in Y:(x,y) \in X'\times Y'\}$ contains exactly one element
+
+WTS: Deduce Axiom 3.11 from Lemma 3.4.10
+
+Let $X$ and $Y$ be sets. Then $X \times Y$ is a set and thus by Lemma 3.4.10, then $\{X'\times Y' : X'\times Y'\subseteq X\times Y\}$ is a set. Let this set be $A$ Then, let $P$ be the predicate st for $X'\times Y' \in A$, $P(X' \times Y')$ is true if $X' \times Y'$ obeys the vertical line test. We apply the axiom of specification to get the set $\{X' \times Y' \in A: P(X' \times Y')\}$. We call this set $B$. Then, using 3.5.10,  if a subset $X' \times Y'$ of $X\times Y$ passes the vertical line test, then there exists exactly one unique function from $X$ to $Y$ which graph is $X'\times Y'$. For each $X' \times Y'\in B$, let $f_{X'\times Y'}$ be the unique function from $X$ to $Y$ with graph $G$. Then, using the axiom of replacement, we get the set $\{f_{X'\times Y'}: X' \times Y' \in B\}$ . Let this set be $C$. We claim that C the set containing all functions from $X$ to $Y$ and thus is also the set $Y^X$.
+
+Let $c \in C$, then $c=f_{X'\times Y'}$, and thus $c$ is a function from X to Y. Thus. all elements of $C$ are functions from $X$ to $Y$. Let $h$ be a function from $X$ to $Y$, then there is a graph $G$ of $h$ that is a subset of $X \times Y$ defined by $\{(x,h(x)): x \in X\}$. By definition of a function,  for each $x$, $h(x)$ is a unique element of $Y$, thus this will mean that  the set $\{y \in Y:(x,y) \in X'\times Y'\}$ contains exactly one element for any $x$. Thus, $G$ passes the vertical line test and $G \in B$ and thus $f_G \in C$. Since there is only one unique function from $X$ to $Y$ with graph $G$, then $f_G=h$ and thus $h \in C$. Thus, we have also shown that every function from $X$ to $Y$ is an element of $C$ and thus the claim that $C=Y^X$ exist is justified. $\square$
+
+\section{Exercise 3.5.12(i)}
+WTS: Let $X$ be a set, let $f:\mathbb{N} \times X \rightarrow X$ be a function, and let $c \in X$. Show that there exists a function $a: X \rightarrow X$ st $a(0)=c$ and $a(n++)=f(n,a(n))$ for all $n \in \mathbb{N}$.
+
+We first show that for every natural number $N \in \mathbb{N}$, there exists a unique function $a_N:\{n \in N: n \le N\} \rightarrow X$ st $a_N(0)=c$ and $a_N(n++)=f_{(n,a_N(n))}$ for all $n \in \mathbb{N}$ st $n < N$.
+
+We use induction on n. First consider the base case 0, then we can define $a_0$ from $\{0\}$ to $X$ where $a_0(0)=c$.  It is also vacuously true that $a_0(n++)=f_{(n,a_N(n))}$ for all $n \in \mathbb{N}$ st $n < 0$. 
+
+Assume that we have shown that for $N \in \mathbb{N}$, there exists a function $a_N:\{n \in N: n \le N\} \rightarrow X$ st $a_N(0)=c$ and $a_N(n++)=f_{(n,a_N(n))}$ for all $n \in \mathbb{N}$ st $n < N$. We now consider $N++$. By our induction hypothesis $a_N$ exists. So we define $a_{N++}$  as the function from $\{ n \in N: n \le N++\}$ to X where
+$a_{N++}(n)=a_{N}(n)$ for all $n \in \mathbb{N}$ st $n \le N$ and $a_{N++}(N++)=f_{(N,a_N(N))}$. Thus, $a_{N++}(0)=a_{N}(0)=c$. Also, since $a_{N++}(n)=a_{N}(n)$ for all $n \in \mathbb{N}$ st $n \le N$. We have that for 
+$a_{N++}(N++)=f_{(N,a_N(N))}=f_{(N,a_{N++}(N))}$. Combined with the fact that $a_{N++}(n++)=a_{N}(n++)=f_{(n,a_N(n))}=f_{(n,a_{N++}(n))}$ for all $n \in \mathbb{N}$ st $n < N$ using the induction hypothesis. We get that $a_{N++}(n++)=f_{(n,a_{N++}(n))}$ for all $n \in \mathbb{N}$ st $n < N++$.  This closes the induction.
+
+We have gotten that for every natural number $N \in \mathbb{N}$, there exists a function $a_N:\{n \in N: n \le N\} \rightarrow X$ st $a_N(0)=c$ and $a_N(n++)=f_{(n,a_N(n))}$ for all $n \in \mathbb{N}$ st $n < N$. We now show uniqueness.
+
+Note: my first attempt involved showing uniqueness simultaneously within the same induction above, but it ends up having you do an induction within an induction(nested inductions) which is more confusing.
+
+Let $N \in \mathbb{N}$, we will show that any function $b$ from $\{n \in N: n \le N\}$ to X st $b(0)=c$ and $b(n++)=f_{(n,a_N(n))}$ is the same function as $a_N$. Their domain and codomain are clearly the same. 
+
+Now, we just have to show that $a_N(n)=b(n)$ for $n\in \mathbb{N}$ and  $n \le N$. For the base case $n=0$, we have that $b(0)=c=a_N(0)$. Suppose inductively we have shown that $a_N(n)=b(n)$ for $n \in \mathbb{N}$ and $n \le N$. Then, we have to show that $a_N(n++)=b(n++)$ for $n++ \in \mathbb{N}$ and $n++ \le N$.  If $n++>N$, then the statement is vacuously true. Otherwise. if $n++ \le N$, then $b(n++)=f_{(n,b(n))}$  by construction of $b$. By the inductive hypothesis, $b(n)=a_N(n)$.  Thus, we also have that $b(n++)=f_{(n,a_N(n))}=a_N(n++)$.  This closes the induction and we have shown that for any $n \in \mathbb{N}$, $a_N(n)=b(n)$ if $n \le N$. This also allows us to conclude that $a_N=B$. 
+
+Implicit definition of function:
+Let $a$ be a function from $\mathbb{N}$ to $X$ defined by $a(N)=a_N(N)$ for $N \in \mathbb{N}$. 
+
+Full definition of function:
+Now, we have that for every natural number $N \in \mathbb{N}$, there exists a unique function $a_N:\{n \in N: n \le N\} \rightarrow X$ st $a_N(0)=c$ and $a_N(n++)=f_{(n,a_N(n))}$ for all $n \in \mathbb{N}$ st $n < N$. Let $P$ be the predicate pertaining to  $N \in \mathbb{N}$, and $x \in X$, st $P(N,x)$ is true if $x=a_N(N)$, the existence of $a_N(N)$ is guaranteed by our previous result so there is exactly one such $x \in X$. We can thus construct the function $a$ with domain $\mathbb{N}$ and codomain $X$, st when given any input $x\in X$, it returns the unique output $f(x)=a_N(N)$.
+
+We now show that $a$ has the desired property : $a(0)=c$ and $a(n++)=f(n,a(n))$ for all $n \in \mathbb{N}$. The first is clearly true since $a(0)=a_0(0)=c$. The second we do by induction.
+
+We first consider the base case $n=0$, then $a(0++)=a_{0++}(0++)=f(0,a_0(0))=f(0,a(0))$. Suppose inductively, we have shown that for some $n++ \in \mathbb{N}$, that $a(n++)=f(n,a(n))$, then we now show that for $m=n++$ that $a(m++)=f(m,a(m))$. Since, $a(n++)=a_{n++}(n++)$, and $a(m++)=a_{m++}(m++)$ and also by definition, we have that $a_{m++}(m++)=f(m,a_m(m))$, then we have that $a(m++)=f(m,a_m(m))=f(n++,a_{n++}(n++)=f(n++,a(n++))=f(m,a(m)$ as desired. This closes the induction 
+
+Finally, we have to show that $a$ is unique. Suppose, there is $d$ which also has the desired properties. We first have that $d$ has the same domain and codomain as $a$. Now, we just have to show that $d(n)=a(n)$ for any $n \in \mathbb{N}$. We do this by induction. 
+
+For the base case $n=0$, we have that $d(0)=c=a(0)$. Now suppose inductively, we have shown that $d(n)=a(n)$ for some $n \in \mathbb{N}$, we now show that $d(n++)=a(n++)$. From the LHS, by construction of $d$, $d(n++)=f(n,d(n))$, by our inductive hypothesis, $d(n)=a(n)$ so we have that $d(n++)=f(n,a(n))$ but then $f(n,a(n))=a(n++)$ so we have that $d(n++)=a(n++)$ as desired. This closes the induction, thus $d=a$ and $a$ is unique. $\square$
+
+
+Thanks for the response, its clearer now but just to clarify my thoughts:
+
+So my original idea is that when we use induction, we have to proof the statement "if $n \le N$, then $a_N(n)=g(n)$"  for all $n \in \mathbb{N}$.  Thus, in the inductive hypothesis, I thought that there was  a need to split the cases because what if $n>N$ in the induction. 
+
+But your saying that there is no need to do the above because in your inductive hypothesis itself, you say that we want to show that if $n++ \le N$, then $a(n++)=g(n++)$. So when going on to proof this, its no different from a direct proof, there is no need to consider the case when $n > N$ since it will hold vacuously automatically and we only need to talk about the cases where $n++ \le N$. $\square$
+
+\section{Exercise 3.5.13}
+
+WTS(Full question): Suppose we have a set $N'$ of "alternative natural numbers", an "alternative zero", $0'$, and an "alternative increment operation" which takes any alternative natural number $n' \in \mathbb{N'}$ and returns another alternative natural number $n'++' \in N'$, such that the Peano axioms (Axioms 2.1-2.5) all hold with the natural numbers, zero, and increment replaced by their alternative counterparts. Show that there exists a bijection $f : \mathbb{N} \rightarrow \mathbb{N'}$ from the natural numbers to the alternative natural numbers such that f (0) = $0'$, and such that for any $n \in N$ and $n' \in N'$, we have $f (n) = n'$ if and only if $f (n++) = n'
+++'$. 
+
+WTS: First show there exists a bijection f from $\mathbb{N}$ to $\mathbb{N'}$. Next, show that $f(n)=n'$ iff $f(n++)=n'++'$.  
+
+We first let $g$ be a function from $\mathbb{N} \times \mathbb{N'}$ to $\mathbb{N'}$, defined by $g((n,n'))=n'++'$.  We also have that $0' \in \mathbb{N'}$. Then, using exercise 3.5.12, there exists a unique function $f$ from $\mathbb{N}$ to $\mathbb{N'}$, st $f(0)=0'$ and $f(n++)=g((n,f(n)))=f(n)++'$ for
+all $n \in \mathbb{N}$. We now show that such an $f$ is a bijection.
+
+We first show that if $a\not=b$, then $f(a)\not=f(b)$, for all $a\in \mathbb{N}$ and $b\in \mathbb{N}$. We do this by induction on $a$. We first consider the base case $a=0$, then $f(a)=0'$, let $b \in \mathbb{N}$ st $a\not = b$, then $b$ is positive and thus, there exists a unique $c$ where $c++=b$. So, we have that $f(b)=f(c)++'$. Thus, $f(a)\not = f(b)$ since $0'$ is not the successor of any number by the peano axioms. Suppose inductively, we have that shown that if $a\not=b$, then $f(a)\not=f(b)$, for some $a\in \mathbb{N}$ and all $b\in \mathbb{N}$. Then we now show that if $a++\not = d$ for $d \in \mathbb{N}$, then $f(a++) \not= f(d)$. First, we have that $f(a++)=f(a)++'$. Let $d \in \mathbb{N}$ st $a++ \not= d$, if $d$ is positive, then there exists $e \in \mathbb{N}$ st $e++=d$. We also have that $e \not=a$, since otherwise $e++=a++=d$,
+then  by our inductive hypothesis, we have that $f(e) \not=f(a)$. This will also mean that $f(e)++' \not= f(a)++'$ since different numbers have different successors.
+ Finally, since, $f(d)=f(e)++'$ , then we have that $f(a++) \not=f(d)$ as desired. Also, if $d=0$, then since $a++ \not= 0$ since $0$ is not the successor of any number by the peano axiom, then $a++ \not= d$ and as shown in the base case, we still have that $f(a++) \not= f(d)$ as desired.  This closes the induction. Thus, we have shown that $f$ is an injection. Next, we show that $f$ is a surjection.
+
+ We want show that if $n' \in \mathbb{N'}$, then $n' \in f(\mathbb{N})$. We do this by induction. First, consider the base case, $n'=0'$, then since $f(0)=0'$, then $n' \in f(\mathbb{N})$. Suppose inductively, we have shown for some $n' \in \mathbb{N'}$ that $n' \in f(\mathbb{N})$. Note that this is equivalent to saying that there exists $n \in \mathbb{N}$ st $f(n)=n'$. Now, we want to show that $n'++' \in f(\mathbb{N})$.  By our inductive hypothesis, we have that there exists $n \in \mathbb{N}$ st $f(n)=n'$. Then, $f(n++)=f(n)++'=n'++'$ and thus $n'++' \in f(\mathbb{N})$ as desired. This closes the induction. We have thus shown that every element of $
+ \mathbb{N'}$ is in the range of $f$ or equivalently $f$ is surjective. This closes the induction.
+
+The two inductions above let us conclude that $f$ is a bijection as desired. 
+
+Finally, we show that $f (n) = n'$ if and only if $f (n++) = n'
+++'$. This is a very basic exercise and i actually did use one of the results in the earlier proof.
+
+$\Longrightarrow$ Assume  $f (n) = n'$, then $f(n++)=f(n)++'=n'++'$ by axiom of substitution.
+
+$\Longleftarrow$ Assume $f(n++)=n'++'$, then $f(n++)=f(n)++'$ by definition, thus we have that $n'++'=f(n)++'$ . And thus, since different numbers have different successors, $n'=f(n)$ since otherwise, $n'++'\not =f(n)++'$ which is a contradiction. $\square$
+
+
+
+
+
+
+
+\end{document}
